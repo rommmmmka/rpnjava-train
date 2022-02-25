@@ -1,5 +1,9 @@
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Scanner;
 import java.io.IOException;
-import java.util.*;
 
 public class Main {
     static Train train;
@@ -16,9 +20,11 @@ public class Main {
             String[] options = {
                     "1 - Добавить вагон",
                     "2 - Добавить пассажира",
-                    "3 - Вывести общее число пассажиров и багажа",
+                    "3 - Вывести список пассажиров и багажа",
                     "4 - Вывести список вагонов",
-                    "5 - Выйти"
+                    "5 - Сохранить в файл",
+                    "6 - Загрузить из файла",
+                    "0 - Выйти"
             };
             printMenu(options);
             try {
@@ -26,9 +32,11 @@ public class Main {
                 switch (option){
                     case 1: addRailcar(scanner); break;
                     case 2: addPassenger(scanner); break;
-                    case 3: printPassengersAndBaggage(); break;
+                    case 3: printPassengersAndBaggage(scanner); break;
                     case 4: printRailcars(scanner); break;
-                    case 5: System.exit(1);
+                    case 5: saveToFile(scanner); break;
+                    case 6: loadFromFile(); break;
+                    case 0: System.exit(1);
                     default: throw new IOException();
                 }
             }
@@ -87,16 +95,51 @@ public class Main {
         }
     }
 
-    private static void printPassengersAndBaggage() {
-        int passengers = 0, baggage = 0;
+    private static void printPassengersAndBaggage(Scanner scanner) {
+        int maxPassengers = 0, passengers = 0, baggage = 0, baggageWeight = 0;
         for (Railcar r: train.getRailcars()) {
+            maxPassengers += r.getPassengersMax();
             for (Passenger p: r.getPassengers()) {
                 passengers++;
                 baggage += p.getBaggage().size();
+                for (Baggage b: p.getBaggage())
+                    baggageWeight += b.getWeight();
             }
         }
-        System.out.println("Количество пассажиров: " + passengers);
-        System.out.println("Количество багажа: " + baggage);
+        System.out.println("Вместимость поезда: " + maxPassengers + " пассажиров");
+        System.out.println("Всего пассажиров: " + passengers);
+        System.out.println("Всего багажа: " + baggage);
+        System.out.println("Суммарный вес багажа: " + baggageWeight + "кг");
+        System.out.println("Выберите вагон для отображения пассажиров и багажа в нём:");
+        for (int i = 0; i < train.getRailcars().size(); i++) {
+            System.out.println(" " + (i + 1) + " - " + train.getRailcars().get(i));
+        }
+        System.out.println(" 0 - В меню");
+        try {
+            int option = Integer.parseInt(scanner.nextLine()) - 1;
+            if (option == -1)
+                return;
+            if (option < 0 || option >= train.getRailcars().size())
+                throw new Exception();
+            printRailcarPassengersAndBaggage(option);
+        }
+        catch (Exception e) {
+            System.out.println("Введён неверный номер вагона");
+        }
+    }
+
+    private static void printRailcarPassengersAndBaggage(int railcarNumber) {
+        try {
+            for (Passenger p: train.getRailcars().get(railcarNumber).getPassengers()) {
+                System.out.println(p.toString());
+                for (Baggage b: p.getBaggage())
+                    System.out.println(" " + b.toString());
+            }
+        }
+        catch (Exception e) {
+            System.out.println("Введён неверный номер вагона");
+        }
+
     }
 
     private static void printRailcars(Scanner scanner) {
@@ -128,7 +171,7 @@ public class Main {
     }
 
     private static void printRailcarsComfort() {
-        List<Railcar> railcars = train.getRailcars();
+        List<Railcar> railcars = new ArrayList<>(train.getRailcars());
         Collections.sort(railcars);
         for (Railcar i: railcars) {
             System.out.println(i);
@@ -147,6 +190,34 @@ public class Main {
         }
         catch (Exception e) {
             System.out.println("Ошибка: введены недопустимые данные");
+        }
+    }
+
+    private static void saveToFile(Scanner scanner) {
+        try{
+            System.out.print("Введите имя файла: ");
+            String fileName = scanner.nextLine() + ".impact";
+            FileOutputStream fileOutputStream = new FileOutputStream(fileName);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(train);
+            objectOutputStream.close();
+            System.out.println("Успешно сохранено!");
+        }
+        catch (Exception e) {
+            System.out.println("Ошибка сохранения!");
+        }
+    }
+
+    private static void loadFromFile() {
+        try {
+            FileInputStream fileInputStream = new FileInputStream("C:\\Users\\Username\\Desktop\\save.ser");
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            train = (Train) objectInputStream.readObject();
+            objectInputStream.close();
+            System.out.println("Успешно загружено!");
+        }
+        catch (Exception e) {
+            System.out.println("Ошибка загрузки!");
         }
     }
 }

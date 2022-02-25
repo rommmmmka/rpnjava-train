@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Baggage {
+public class Baggage implements Serializable {
     private int weight;
 
     public Baggage(int weight) {

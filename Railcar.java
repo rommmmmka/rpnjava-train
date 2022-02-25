@@ -1,8 +1,9 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Railcar implements Comparable <Railcar> {
+public class Railcar implements Comparable <Railcar>, Serializable {
     private String model;
     private Integer passengersMax, comfortLevel;
     private List<Passenger> passengers;
