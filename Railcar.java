@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Railcar implements Comparable <Railcar>, Serializable {
+public class Railcar implements Comparable<Railcar>, Serializable {
     private String model;
     private Integer passengersMax, comfortLevel;
     private List<Passenger> passengers;
@@ -71,9 +71,9 @@ public class Railcar implements Comparable <Railcar>, Serializable {
         return this.comfortLevel.compareTo(o.getComfortLevel());
     }
 
-    public void addPassenger(Passenger passenger) {
+    public void addPassenger(Passenger passenger) throws RailcarNoFreeSpaceException {
         if (passengers.size() == passengersMax)
-            System.out.println("Ошибка: В вагоне нет свободных мест!");
+            throw new RailcarNoFreeSpaceException();
         else
             this.passengers.add(passenger);
     }
