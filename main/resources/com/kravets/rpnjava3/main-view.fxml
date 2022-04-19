@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="495.0" prefWidth="839.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.kravets.rpnjava3.MainController">
+   <children>
+      <StackPane prefHeight="570.0" prefWidth="839.0">
+         <children>
+            <Pane fx:id="paneMain" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="495.0" prefWidth="839.0" spacing="20.0">
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                     <children>
+                        <Button fx:id="buttonAdmin" mnemonicParsing="false" onMouseClicked="#onAdminButtonClick" prefHeight="53.0" prefWidth="155.0" text="Адміністратар" />
+                        <Button fx:id="buttonVisitor" mnemonicParsing="false" onMouseClicked="#onUserButtonClick" prefHeight="53.0" prefWidth="155.0" text="Карыстальнік" />
+                     </children>
+                  </VBox>
+               </children>
+            </Pane>
+            <Pane fx:id="paneAdmin" prefHeight="200.0" prefWidth="200.0" visible="false">
+               <children>
+                  <VBox prefHeight="495.0" prefWidth="839.0">
+                     <children>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="buttonGoBack" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#onGoBackButtonClick" prefHeight="25.0" prefWidth="839.0" text="Назад" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                        <SplitPane dividerPositions="0.3333, 0.6666" prefHeight="640.0" prefWidth="799.0">
+                          <items>
+                              <VBox maxWidth="273.0" minWidth="273.0" prefHeight="443.0" prefWidth="273.0">
+                                 <children>
+                                    <Label fx:id="labelCurrentRailcar" prefHeight="120.0" prefWidth="273.0" text="Вагон не выбраны" />
+                                    <ScrollPane prefHeight="348.0" prefWidth="276.0">
+                                       <content>
+                                          <VBox fx:id="boxRailcars" prefHeight="257.0" prefWidth="249.0" />
+                                       </content>
+                                    </ScrollPane>
+                                    <TextField fx:id="textfieldRailcarModel" promptText="Мадэль" />
+                                    <TextField fx:id="textfieldRailcarPassengersMax" promptText="Максімальная колькасць пасажыраў" />
+                                    <TextField fx:id="textfieldRailcarComfortLevel" promptText="Узровень камфортнасці" />
+                                    <HBox prefHeight="25.0" prefWidth="160.0">
+                                       <children>
+                                          <Button fx:id="buttonRailcarAdd" mnemonicParsing="false" onMouseClicked="#adminOnAddRailcarButtonClick" prefWidth="92.0" text="Дабавіць" />
+                                          <Button fx:id="buttonRailcarEdit" mnemonicParsing="false" onMouseClicked="#adminOnEditRailcarButtonClick" prefHeight="25.0" prefWidth="92.0" text="Змяніць" />
+                                          <Button fx:id="buttonRailcarDelete" mnemonicParsing="false" onMouseClicked="#adminOnDeleteRailcarButtonClick" prefWidth="92.0" text="Выдаліць" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox maxWidth="273.0" minHeight="273.0" prefHeight="273.0" prefWidth="100.0">
+                                 <children>
+                                    <Label fx:id="labelCurrentPassenger" prefHeight="156.0" prefWidth="273.0" text="Пасажыр не выбраны" />
+                                    <ScrollPane prefHeight="383.0" prefWidth="273.0">
+                                       <content>
+                                          <VBox fx:id="boxPassengers" prefHeight="268.0" prefWidth="244.0" />
+                                       </content>
+                                    </ScrollPane>
+                                    <TextField fx:id="textfieldPassengerLastname" promptText="Прозвішча" />
+                                    <TextField fx:id="textfieldPassengerFirstname" promptText="Імя" />
+                                    <TextField fx:id="textfieldPassengerPatronymic" promptText="Імя па бацьку" />
+                                    <HBox prefHeight="25.0" prefWidth="160.0">
+                                       <children>
+                                          <Button fx:id="buttonPassengerAdd" mnemonicParsing="false" onMouseClicked="#adminOnAddPassengerButtonClick" prefHeight="25.0" prefWidth="92.0" text="Дабавіць" />
+                                          <Button fx:id="buttonPassengerEdit" mnemonicParsing="false" onMouseClicked="#adminOnEditPassengerButtonClick" prefHeight="25.0" prefWidth="92.0" text="Змяніць" />
+                                          <Button fx:id="buttonPassengerDelete" mnemonicParsing="false" onMouseClicked="#adminOnDeletePassengerButtonClick" prefWidth="92.0" text="Выдаліць" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox maxWidth="278.0" minWidth="278.0" prefHeight="273.0" prefWidth="278.0">
+                                 <children>
+                                    <Label fx:id="labelCurrentBaggage" prefHeight="180.0" prefWidth="278.0" text="Багаж не выбраны" />
+                                    <ScrollPane prefHeight="457.0" prefWidth="276.0">
+                                       <content>
+                                          <VBox fx:id="boxBaggage" prefHeight="300.0" prefWidth="247.0" />
+                                       </content>
+                                    </ScrollPane>
+                                    <TextField fx:id="textfieldBaggageWeight" prefHeight="0.0" prefWidth="276.0" promptText="Вага багажу" />
+                                    <HBox prefHeight="25.0" prefWidth="160.0">
+                                       <children>
+                                          <Button fx:id="buttonBaggageAdd" mnemonicParsing="false" onMouseClicked="#adminOnAddBaggageButtonClick" prefHeight="25.0" prefWidth="92.0" text="Дабавіць" />
+                                          <Button fx:id="buttonBaggageEdit" mnemonicParsing="false" onMouseClicked="#adminOnEditBaggageButtonClick" prefHeight="25.0" prefWidth="92.0" text="Змяніць" />
+                                          <Button fx:id="buttonBaggageDelete" mnemonicParsing="false" onMouseClicked="#adminOnDeleteBaggageButtonClick" prefWidth="92.0" text="Выдаліць" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                          </items>
+                        </SplitPane>
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="buttonSaveToFile" mnemonicParsing="false" onMouseClicked="#adminOnFileSaveButtonClick" prefWidth="420.0" text="Захаваць у файл" />
+                              <Button fx:id="buttonLoadFromFile" mnemonicParsing="false" onMouseClicked="#adminOnFileLoadButtonClick" prefWidth="420.0" text="Загрузіць з файла" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </Pane>
+            <Pane fx:id="paneVisitor" visible="false">
+               <children>
+                  <VBox>
+                     <children>
+                        <AnchorPane prefHeight="0.0" prefWidth="839.0">
+                           <children>
+                              <Button fx:id="buttonGoBack2" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#onGoBackButtonClick" prefHeight="25.0" prefWidth="839.0" text="Назад" textAlignment="CENTER" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                        <SplitPane dividerPositions="0.3333, 0.6666" prefHeight="467.0" prefWidth="839.0">
+                           <items>
+                              <VBox maxWidth="273.0" minWidth="273.0" prefHeight="443.0" prefWidth="273.0">
+                                 <children>
+                                    <Label fx:id="labelCurrentRailcar2" prefHeight="101.0" prefWidth="273.0" text="Вагон не выбраны" />
+                                    <ScrollPane prefHeight="426.0" prefWidth="273.0">
+                                       <content>
+                                          <VBox fx:id="boxRailcars2" prefHeight="0.0" prefWidth="267.0" />
+                                       </content>
+                                    </ScrollPane>
+                                    <ChoiceBox fx:id="choiceRailcars" onAction="#userRedrawRailcarsList" prefWidth="305.0" />
+                                 </children>
+                              </VBox>
+                              <VBox maxWidth="273.0" minWidth="273.0" prefHeight="200.0" prefWidth="273.0">
+                                 <children>
+                                    <Label fx:id="labelCurrentPassenger2" prefHeight="120.0" prefWidth="273.0" text="Пасажыр не выбраны" />
+                                    <ScrollPane prefHeight="444.0" prefWidth="273.0">
+                                       <content>
+                                          <VBox fx:id="boxPassengers2" prefWidth="269.0" />
+                                       </content>
+                                    </ScrollPane>
+                                    <ChoiceBox fx:id="choicePassengers" onAction="#userRedrawPassengersList" prefHeight="25.0" prefWidth="311.0" />
+                                 </children>
+                              </VBox>
+                              <VBox maxWidth="278.0" minWidth="278.0" prefHeight="200.0" prefWidth="278.0">
+                                 <children>
+                                    <Label fx:id="labelCurrentBaggage2" prefHeight="100.0" prefWidth="278.0" text="Багаж не выбраны" />
+                                    <ScrollPane prefHeight="424.0" prefWidth="276.0">
+                                       <content>
+                                          <VBox fx:id="boxBaggage2" prefHeight="326.0" prefWidth="274.0" />
+                                       </content>
+                                    </ScrollPane>
+                                    <ChoiceBox fx:id="choiceBaggage" onAction="#userRedrawBaggageList" prefHeight="25.0" prefWidth="322.0" />
+                                 </children>
+                              </VBox>
+                           </items>
+                        </SplitPane>
+                     </children>
+                  </VBox>
+               </children>
+            </Pane>
+         </children>
+      </StackPane>
+   </children>
+
+</VBox>

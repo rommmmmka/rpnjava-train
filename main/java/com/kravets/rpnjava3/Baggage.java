@@ -1,3 +1,5 @@
+package com.kravets.rpnjava3;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -14,13 +16,6 @@ public class Baggage implements Serializable {
 
     public void setWeight(int weight) {
         this.weight = weight;
-    }
-
-    @Override
-    public String toString() {
-        return "Baggage{" +
-                "weight=" + weight +
-                '}';
     }
 
     @Override

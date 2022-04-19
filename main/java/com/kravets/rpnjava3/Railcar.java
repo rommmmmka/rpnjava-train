@@ -1,3 +1,5 @@
+package com.kravets.rpnjava3;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,12 +47,11 @@ public class Railcar implements Comparable<Railcar>, Serializable {
 
     @Override
     public String toString() {
-        return "Railcar{" +
-                "model='" + model + '\'' +
-                ", passengersMax=" + passengersMax +
-                ", comfortLevel=" + comfortLevel +
-                ", passengers=" + passengers.size() +
-                '}';
+        return String.format("Вагон %s\nМакс. пасажыраў: %s\nУзр. камфортнасці: %s", model, passengersMax, comfortLevel);
+    }
+
+    public String toStringShort() {
+        return String.format("Вагон %s", model);
     }
 
     @Override
@@ -76,5 +77,9 @@ public class Railcar implements Comparable<Railcar>, Serializable {
             throw new RailcarNoFreeSpaceException();
         else
             this.passengers.add(passenger);
+    }
+
+    public void removePassenger(Passenger passenger) {
+        this.passengers.remove(passenger);
     }
 }

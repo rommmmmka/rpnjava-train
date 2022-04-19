@@ -1,3 +1,5 @@
+package com.kravets.rpnjava3;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,13 +17,6 @@ public class Train implements Serializable {
     }
 
     @Override
-    public String toString() {
-        return "Train{" +
-                "railcars=" + railcars +
-                '}';
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -36,5 +31,9 @@ public class Train implements Serializable {
 
     public void addRailcar(Railcar railcar) {
         this.railcars.add(railcar);
+    }
+
+    public void removeRailcar(Railcar railcar) {
+        this.railcars.remove(railcar);
     }
 }

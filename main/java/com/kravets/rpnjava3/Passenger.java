@@ -1,3 +1,5 @@
+package com.kravets.rpnjava3;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,12 +48,11 @@ public class Passenger implements Serializable {
 
     @Override
     public String toString() {
-        return "Passenger{" +
-                "lastName='" + lastName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", patronymic='" + patronymic + '\'' +
-                ", baggageCount=" + baggage.size() +
-                '}';
+        return String.format("%s\n%s\n%s", lastName, firstName, patronymic);
+    }
+
+    public String toStringShort() {
+        return String.format("%s %s. %s.", lastName, firstName.charAt(0), patronymic.charAt(0));
     }
 
     @Override
@@ -70,5 +71,9 @@ public class Passenger implements Serializable {
 
     public void addBaggage(Baggage baggage) {
         this.baggage.add(baggage);
+    }
+
+    public void removeBaggage(Baggage baggage) {
+        this.baggage.remove(baggage);
     }
 }
